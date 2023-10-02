@@ -29,7 +29,10 @@ const ProductList = () => {
     const handleRemovCart = (id) => {
         dispatch(removeCart(id))
     }
-    const handleModel = () => {
+    const handleModel = (id) => {
+        const cartData = product && product.filter(data => data._id == id);
+         const [cart] = cartData
+        setModelData(cart)
         setShow(true);
     }
 
@@ -53,7 +56,7 @@ const ProductList = () => {
                         {loader ? LoderSpinner : product && product.map((el) =>
                             <div >
 
-                                <div onClick={handleModel} className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                <div onClick={() => handleModel(el._id)}  className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                                     <img
                                         src={el.image}
 
@@ -71,15 +74,12 @@ const ProductList = () => {
                                 <Button variant="success" onClick={() => handleAddToCart(el._id)}  >Add To Cart</Button>
                                 &nbsp;
                                 <Button variant="danger" onClick={() => handleRemovCart(el._id)}  >Remove Cart</Button>
-                                <ProductDetails show={show}
-                                    pic={el.image}
-                                    description={el.productDescription}
-                                    name={el.productName}
-                                    price={el.price}
-                                    handleClose={hideModal} />
+                               
                             </div>)}
                     </div>
-
+                    <ProductDetails show={show}
+                                    data={modelData}
+                                    handleClose={hideModal} />
                 </div>
             </div>
 

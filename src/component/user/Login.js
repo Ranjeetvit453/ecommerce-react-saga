@@ -1,6 +1,6 @@
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Card, Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Card, Container, Row, Col, Form } from 'react-bootstrap';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
@@ -10,7 +10,7 @@ import { LoderSpinner } from "../../utils/Utils"
 import { apiCall } from "../../utils/Utils";
 import { UserAuth } from "../../auth/Auth";
 import { compose } from "redux";
-
+import { Button } from 'flowbite-react';
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,6 +23,7 @@ const Login = () => {
   }
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.user.loader);
+  console.log(" loader ",loader)
   const insitalValuesSchema = Yup.object({
     email: Yup.string("Enter your email").email("Please enter valid Email").required("Email is required"),
     password: Yup.string("Enter your password").required("Password is required")
@@ -35,18 +36,20 @@ const Login = () => {
       email: ""
     },
     async onSubmit(values) {
-
+      dispatch(userLoginRequest())
       const userRes = await apiCall("POST", '/user/login', values, false);
-      dispatch(userClearState())
+      
       if (userRes?.data?.status == 200) {
         toast.success(userRes?.data?.message);
         localStorage.setItem('getToken', JSON.stringify(userRes?.data?.token));
-        auth.login(userRes?.data?.token);
-
+         const token = localStorage.getItem('getToken');
+        auth.login(token);
+        dispatch(userClearState())
 
 
       } else {
         toast.error(userRes?.data?.message)
+        dispatch(userClearState())
       }
 
 
@@ -57,7 +60,7 @@ const Login = () => {
     <div>
 
       <Container>
-        {loader ? <LoderSpinner /> :
+       
           <Row>
             <Col xs={6} md={2}></Col>
             <Col xs={6} md={8} style={{ marginTop: 123 }}>
@@ -93,9 +96,12 @@ const Login = () => {
                           {formik.errors.password} </span>)}</p>
                       </Form.Group>
 
-                      <div style={{ textAlign: "center" }}>
-                        <Button variant="success" type="submit" >Save</Button>
-                      </div>
+                      
+                      <Button type="submit" 
+                      isProcessing = {loader} 
+                      size="md">Login</Button>
+                        
+                    
                     </Form>
                   </Card.Text>
                   <div style={{ textAlign: "center" }}>
@@ -107,7 +113,7 @@ const Login = () => {
             </Col>
             <Col xs={6} md={2}></Col>
           </Row>
-        }
+      
         <ToastContainer
           position="top-right"
           autoClose={5000}

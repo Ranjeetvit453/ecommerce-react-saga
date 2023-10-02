@@ -22,17 +22,10 @@ const products = [
   { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
   { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
 ]
-const callsToAction = [
-  { name: 'product list', href: '/', icon: PlayCircleIcon },
-  { name: 'Dashboard', href: '/dashboard', icon: PhoneIcon },
-]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 const SidebarLayout = () => {
   const cartData = useSelector((state) => state?.cart);
-  console.log(" cartData ------------", cartData?.cart?.length)
+  
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const auth = UserAuth();
   const handleLogout = () => {
@@ -77,7 +70,7 @@ const SidebarLayout = () => {
             <NavLink to="/dashboard" className="text-sm font-semibold leading-6 text-gray-900">
               Dashboard
             </NavLink>
-            <NavLink to="/profile" className="text-sm font-semibold leading-6 text-gray-900">
+            <NavLink to="/profile/ranjeet" className="text-sm font-semibold leading-6 text-gray-900">
               Profile
             </NavLink>
             <NavLink to="/cart" className="text-sm font-semibold leading-6 text-gray-900">

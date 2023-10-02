@@ -1,5 +1,5 @@
 import { USER_LOGIN_ERROR,USER_LOGIN_REQUEST
-,USER_LOGIN_SUCCESS,USER_REGISTER_ERROR,USER_REGISTER_SUCCESS,USER_REGISTER_REQUEST ,USER_CLEAR_STATE} from "../type/userType";
+,USER_LOGIN_SUCCESS,USER_REGISTER_ERROR,USER_LIST_REQUEST,USER_REGISTER_SUCCESS,USER_REGISTER_REQUEST ,USER_CLEAR_STATE, USER_LIST_SUCCESS} from "../type/userType";
 
 
 
@@ -8,7 +8,8 @@ const initialState = {
     status:"",
     message:"",
     data:[],
-    error:""
+    error:"",
+    pagesCount:""
 }
 
 
@@ -50,7 +51,7 @@ const userReducer = (state=initialState,action)=>{
             message:""
          }
         case USER_REGISTER_ERROR:
-          console.log("USER_REGISTER_ERROR user reducer",action.userRes)
+        //  console.log("USER_REGISTER_ERROR user reducer",action.userRes)
           return {
             ...state,
             loader:false,
@@ -59,7 +60,7 @@ const userReducer = (state=initialState,action)=>{
             message:""
           }
         case USER_LOGIN_SUCCESS:
-          console.log(" USER_LOGIN_SUCCESS reducer",action.loginData)
+          
         return {
             ...state,
             loader:false,
@@ -73,6 +74,20 @@ const userReducer = (state=initialState,action)=>{
             ...state,
             loader:false,
             error:action.err,
+        }
+      case USER_LIST_REQUEST :
+        return {
+          ...state,
+          loader:true,
+        }
+      case USER_LIST_SUCCESS :
+        console.log(" user list reducer",action.userData)
+        return {
+          ...state,
+          loader:false,
+          status:"",
+          data:action?.userData?.data,
+          pagesCount:action?.userData?.totalCount,
         }
       default :
       return {

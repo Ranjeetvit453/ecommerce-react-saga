@@ -7,9 +7,11 @@ import Modal from 'react-bootstrap/Modal';
 import { flush } from "redux-saga/effects";
 
 const ProductDetails = (props) => {
-
+ // console.log(": proos-----------",props?.data)
   const [show, setShow] = useState(false);
-
+  //console.log(": proos-----------",props?.data[0]?.productName)
+  //const [,image] = props.data[0];
+  //   console.log(": proos-----------",props.data)
   // const handleClose = () => {
   //   return false
   // };
@@ -27,16 +29,16 @@ const ProductDetails = (props) => {
         <Modal.Body>
           <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
             <img
-              src={props.pic}
+              src={props?.data?.image}
 
               className="h-full w-full object-cover object-center group-hover:opacity-75"
             />
           </div>
-          <h3 className="mt-4 text-sm text-gray-700">{props.name}</h3>
-          <p className="mt-1 text-lg font-medium text-gray-900">{props.price}</p>
+          <h3 className="mt-4 text-sm text-gray-700">{props?.data?.productName}</h3>
+          <p className="mt-1 text-lg font-medium text-gray-900">{props?.data?.price}</p>
           <p>  <details>
 
-            <p>{props.description}</p>
+            <p>{props?.data?.productDescription}</p>
           </details></p>
         </Modal.Body>
 
