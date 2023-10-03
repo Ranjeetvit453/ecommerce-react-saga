@@ -7,7 +7,13 @@ import { USER_REGISTER_ERROR,
      USER_REGISTER_REQUEST ,
      USER_LIST_SUCCESS,
      USER_LIST_ERROR,
-     USER_LIST_REQUEST
+     USER_LIST_REQUEST,
+     USER_DELETE_REQUEST,
+     USER_DELETE_SUCCESS,
+     USER_DELETE_ERROR,
+     USER_UPDATE_SUCCESS,
+     USER_UPDATE_ERROR,
+     USER_UPDATE_REQUEST
     } from "../type/userType";
 import { useSelector } from "react-redux";
 
@@ -69,6 +75,41 @@ function* userListRequest(data){
 }
 
 
+function* userDeleteRequest(data){
+ try{
+  const userRes = yield call(apiCall,"DELETE",`/user/user-delete/${data.payload}`,"",true);
+   const userData = userRes?.data;
+  // console.log("userData?.status ",userData?.status)
+   if(userData?.status==200){
+    //console.log("userData?.status if ",userData?.status)
+    yield put({type:USER_DELETE_SUCCESS,userData})
+   }else{
+    yield put({type:USER_DELETE_ERROR,userData})
+   }
+  // console.log(" user delte saga ",userData)
+ }catch(err){
+  yield put({type:USER_DELETE_ERROR,err})
+ }
+
+}
+
+
+function* userUpdateRequest(data){
+  try{
+   const userRes = yield call(apiCall,"PATCH","/user/user-update",data?.payload,true)
+   const userData = userRes?.data;
+   console.log(" user update saga ",userData)
+   if(userData?.status==200){
+    yield put({type:USER_UPDATE_SUCCESS,userData})
+   }else{
+    yield put({type:USER_UPDATE_ERROR,userData})
+   }
+  }catch(err){
+    yield put({type:USER_UPDATE_ERROR,err})
+  }
+}
+
+
 export function* userSaga() {
   // const { data } = yield take(USER_REGISTER_REQUEST);
   // console.log(" userRes ----saga-USER_REGISTER_REQUEST---- ",data)
@@ -76,6 +117,8 @@ export function* userSaga() {
   yield takeEvery(USER_LIST_REQUEST,userListRequest)
   yield takeEvery(USER_REGISTER_REQUEST, userRegisterRequestData)
   yield takeEvery(USER_LOGIN_REQUEST, userLoginRequestData)
+  yield takeEvery(USER_DELETE_REQUEST,userDeleteRequest)
+  yield takeEvery(USER_UPDATE_REQUEST,userUpdateRequest)
 
 }
 

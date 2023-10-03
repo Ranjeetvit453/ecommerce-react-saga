@@ -53,7 +53,7 @@ function App() {
             <Route path="/" element={<ProductList />} />
             <Route path='/cart' element={<Cart />} />
            
-            <Route path="/dashboard" element={<PrivateRoutes><Dashboard /></PrivateRoutes>} />
+            
           {/* <Route path="/profile" element={<PrivateRoutes><Profile /></PrivateRoutes>} />  */}
           <Route path="*" element={<PrivateRoutes><NotFound /></PrivateRoutes>}/>
             {/* <Route path="*" element={<PrivateRoutes><NotFound /></PrivateRoutes>} />
@@ -69,6 +69,7 @@ function App() {
     element={<PrivateRoutes><Profile /></PrivateRoutes>} /> 
      <Route path="/user-list"
       element={<PrivateRoutes><UserList/></PrivateRoutes>}/>
+      <Route path="/dashboard" element={<PrivateRoutes><Dashboard /></PrivateRoutes>} />
   </Route>
           
         </Routes>

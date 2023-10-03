@@ -1,5 +1,17 @@
 import { USER_LOGIN_ERROR,USER_LOGIN_REQUEST
-,USER_LOGIN_SUCCESS,USER_REGISTER_ERROR,USER_LIST_REQUEST,USER_REGISTER_SUCCESS,USER_REGISTER_REQUEST ,USER_CLEAR_STATE, USER_LIST_SUCCESS} from "../type/userType";
+,USER_LOGIN_SUCCESS,
+USER_REGISTER_ERROR,
+USER_LIST_REQUEST,
+USER_REGISTER_SUCCESS,
+USER_REGISTER_REQUEST ,
+USER_CLEAR_STATE,
+ USER_LIST_SUCCESS, 
+ USER_DELETE_REQUEST,
+  USER_DELETE_ERROR,
+  USER_DELETE_SUCCESS,
+  USER_UPDATE_ERROR,
+  USER_UPDATE_SUCCESS
+} from "../type/userType";
 
 
 
@@ -81,13 +93,53 @@ const userReducer = (state=initialState,action)=>{
           loader:true,
         }
       case USER_LIST_SUCCESS :
-        console.log(" user list reducer",action.userData)
+       
         return {
           ...state,
           loader:false,
           status:"",
           data:action?.userData?.data,
           pagesCount:action?.userData?.totalCount,
+        }
+
+      case USER_DELETE_REQUEST:
+        return {
+          ...state,
+          loader:true,
+          error:"",
+          message:""
+
+        }
+      case USER_DELETE_SUCCESS:
+        console.log(" user delete reducer",action.userData)
+        return {
+          ...state,
+          status:action?.userData?.status,
+          message:action?.userData?.message,
+          loader:false
+        }
+      case USER_DELETE_ERROR:
+        return {
+          ...state,
+          loader:false,
+          status:"",
+          message:"",
+          error:action?.userData?.error
+        }
+      case USER_UPDATE_ERROR:
+        return {
+          ...state,
+          loader:false,
+          status:"",
+          message:"",
+          error:action?.userData?.error
+        }
+      case USER_UPDATE_SUCCESS :
+        return {
+          ...state,
+          status:action?.userData?.status,
+          message:action?.userData?.message,
+          loader:false
         }
       default :
       return {

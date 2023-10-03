@@ -2,7 +2,7 @@ import { Table } from 'flowbite-react';
 import { useEffect,useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { LoderSpinner } from '../../utils/Utils';
-import { userListActionRequest } from '../../redux/action/userAction';
+import { userDeleteRequestAction, userClearState,userListActionRequest } from '../../redux/action/userAction';
 import { Pagination } from 'flowbite-react';
 import { FaTrash,FaPenToSquare } from "react-icons/fa6";
 import { CommonModel,UserEditModel } from '../model/CommonModel';
@@ -12,36 +12,47 @@ const UserList = ()=>{
     const pagesCount= useSelector((state)=>state.user?.pagesCount);
    //console.log(" pagesCount user list ",pagesCount)
     const loader = useSelector((state)=>state.user.loader);
+    const status = useSelector((state)=>state.user.status);
+    //console.log(" status --------",status)
     const [currentPage, setCurrentPage] = useState(1);
     const [openModal, setShow] = useState();
     const [delteId, setDelete] = useState();
+    const [userEditData,setUserEdit] = useState();
     const onPageChange = (page) => setCurrentPage(page);
        
         useEffect(()=>{
 
         dispatch(userListActionRequest(currentPage))
      },[currentPage])
-
+     if(status==200){
+      dispatch(userClearState())
+      dispatch(userListActionRequest(currentPage))
+     }
      const handleEdit = (id)=>{
-    //  setShow('pop-up')
-        console.log(" helo  edit ",id)
+        const [userEditData] = userData?.data 
+        && userData?.data?.filter((data)=>data._id==id);
+        setUserEdit(userEditData)
         setShow('initial-focus')
      }
 
      const handleDelete = (id)=>{
-        console.log(" hello delete",id)
         setShow('pop-up')
         setDelete(id)
      }
 
      const handelClose =()=>{
-      console.log(" handelClose ")
       setShow('')
      }
 
      const confirmAction = (id)=>{
-      console.log("confirm ------",id) 
+      dispatch(userDeleteRequestAction(id))
+      setShow('')
      }
+
+    //  const confirmUpdateAction = ()=>{
+    //   console.log("confirmUpdateAction ");
+    //   setShow('')
+    //  }
 
      
 
@@ -53,7 +64,12 @@ const UserList = ()=>{
   
    {loader ? <LoderSpinner/>:
         <Table>
-          <UserEditModel openModal = {openModal} handelClose={handelClose}/>
+          <UserEditModel
+           openModal = {openModal}
+           data = {userEditData}
+           //confirmUpdateAction = {confirmUpdateAction}
+            handelClose={handelClose}
+            />
       <Table.Head>
         <Table.HeadCell>
            name

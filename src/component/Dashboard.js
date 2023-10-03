@@ -2,10 +2,14 @@ import SidebarLayout from "./layout/SidebarLayout"
 
 const Dashboard = ()=>{
     return(
-        <div>
-          
-            <h1> Hello Dashboard</h1>
+       
+             <div class="max-w-sm w-full bg-white dark:bg-gray-800
+         p-4 md:p-6" style={{ marginLeft:265,marginTop:-415}}>
+        <h1> Hello Dashboard</h1>
         </div>
+          
+           
+       
     )
 }
 
