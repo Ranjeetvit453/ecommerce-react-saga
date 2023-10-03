@@ -5,7 +5,7 @@ import { LoderSpinner } from '../../utils/Utils';
 import { userListActionRequest } from '../../redux/action/userAction';
 import { Pagination } from 'flowbite-react';
 import { FaTrash,FaPenToSquare } from "react-icons/fa6";
-import { CommonModel } from '../model/CommonModel';
+import { CommonModel,UserEditModel } from '../model/CommonModel';
 const UserList = ()=>{
     const dispatch = useDispatch();
     const userData = useSelector((state)=>state.user);
@@ -23,13 +23,14 @@ const UserList = ()=>{
      },[currentPage])
 
      const handleEdit = (id)=>{
-      setShow('pop-up')
+    //  setShow('pop-up')
         console.log(" helo  edit ",id)
-        setDelete(id)
+        setShow('initial-focus')
      }
 
      const handleDelete = (id)=>{
         console.log(" hello delete",id)
+        setShow('pop-up')
         setDelete(id)
      }
 
@@ -42,13 +43,17 @@ const UserList = ()=>{
       console.log("confirm ------",id) 
      }
 
+     
+
    return(
     <>
+    
   <div class="max-w-sm w-full bg-white dark:bg-gray-800 p-4 md:p-6" style={{ marginLeft:265,marginTop:-415}}>
   <h4 class="text-2xl font-bold dark:text-white">User List</h4>
   
    {loader ? <LoderSpinner/>:
         <Table>
+          <UserEditModel openModal = {openModal} handelClose={handelClose}/>
       <Table.Head>
         <Table.HeadCell>
            name
@@ -87,7 +92,8 @@ const UserList = ()=>{
               <FaPenToSquare />
             </span>&nbsp;
             <span className="font-medium text-cyan-600
-             hover:underline dark:text-cyan-500" onClick={()=>{handleDelete(data._id)}} >
+             hover:underline dark:text-cyan-500"
+              onClick={()=>{handleDelete(data._id)}} >
               <FaTrash />
             </span>
           </Table.Cell>
