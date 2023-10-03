@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { productList } from "../../redux/action/productAcion";
 import { addToCartAction, removeCart } from "../../redux/action/cartAction"
 import { LoderSpinner } from "../../utils/Utils"
-import { Card, Container, Button, Row, Col } from 'react-bootstrap';
-
+import { Button } from 'flowbite-react';
 import ProductDetails from './ProductDetails';
 
 const ProductList = () => {
@@ -69,12 +68,14 @@ const ProductList = () => {
                                 <p> <details>
                                     <p>{el.productDescription}</p>
                                 </details></p>
-
-
-                                <Button variant="success" onClick={() => handleAddToCart(el._id)}  >Add To Cart</Button>
-                                &nbsp;
-                                <Button variant="danger" onClick={() => handleRemovCart(el._id)}  >Remove Cart</Button>
-                               
+                                <Button type="submit"
+                                onClick={() => handleAddToCart(el._id)}
+                                 color="success">
+                      Add To Cart </Button>
+                      <Button type="submit"
+                                onClick={() => handleRemovCart(el._id)}
+                                 color="warning"
+                                 style={{ marginLeft: "140px",marginTop: "-41px"}}>Remove Cart </Button>
                             </div>)}
                     </div>
                     <ProductDetails show={show}

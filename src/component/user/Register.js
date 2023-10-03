@@ -1,6 +1,8 @@
 import { Navigate ,NavLink } from "react-router-dom";
 // import { useEffect } from "react";
-import {Card,Container,Row,Col,Form,Button} from 'react-bootstrap';
+import {Card,Container,Row,Col,Form} from 'react-bootstrap';
+import { Button } from 'flowbite-react';
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 // import { apiCall } from "../../utils/Utils";
@@ -15,6 +17,7 @@ const Register =() =>{
   
   const dispatch = useDispatch()
   const userData = useSelector((state) => state.user);
+  const loader = useSelector((state) => state.user.loader);
   if(userData?.status==201){
     toast.success(userData?.message);
     dispatch(userClearState());
@@ -106,7 +109,10 @@ const Register =() =>{
          </p>
       </Form.Group>
       <div style={{textAlign:"center"}}>
-      <Button variant="success" type="submit" >Save</Button>
+      <Button type="submit" 
+                      isProcessing = {loader} 
+                      size="md">Save</Button>
+      
       </div>
     </Form>
         </Card.Text>

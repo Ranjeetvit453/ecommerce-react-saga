@@ -1,10 +1,11 @@
 
-import { Card, Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Card, Container, Row, Col, Form } from 'react-bootstrap';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { LoderSpinner } from "../../utils/Utils";
 import { toast, ToastContainer } from "react-toastify";
 import { useSelector, useDispatch } from 'react-redux'
+import { Button } from 'flowbite-react';
 import { addProductRequestAction } from "../../redux/action/productAcion"
 
 const ProductAdd = () => {
@@ -103,7 +104,9 @@ const ProductAdd = () => {
                         </p>
                       </Form.Group>
                       <div style={{ textAlign: "center" }}>
-                        <Button variant="success" type="submit" >Save</Button>
+                      <Button type="submit" color="success">
+                      Save </Button>
+                        
                       </div>
                     </Form>
                   </Card.Text>

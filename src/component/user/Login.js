@@ -23,7 +23,7 @@ const Login = () => {
   }
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.user.loader);
-  console.log(" loader ",loader)
+
   const insitalValuesSchema = Yup.object({
     email: Yup.string("Enter your email").email("Please enter valid Email").required("Email is required"),
     password: Yup.string("Enter your password").required("Password is required")
@@ -95,7 +95,7 @@ const Login = () => {
                         <p> {formik.touched.password && formik.errors.password && (<span className="text-red-400" style={{ color: "red" }}>
                           {formik.errors.password} </span>)}</p>
                       </Form.Group>
-
+                         
                       
                       <Button type="submit" 
                       isProcessing = {loader} 

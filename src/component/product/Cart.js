@@ -2,6 +2,7 @@ import './cart.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { removeCart } from "../../redux/action/cartAction"
+import { Button } from 'flowbite-react';
 const Cart = () => {
     const [quantity, setQuantity] = useState(1)
     const cartData = useSelector((state) => state?.cart?.cart);
@@ -57,8 +58,11 @@ const Cart = () => {
                             <div class="divTableCol"><strong> {data?.price}</strong></div>
                             <div class="divTableCol"><strong>{parseInt(data?.price) * parseInt(quantity) ? parseInt(data?.price) * parseInt(quantity) : parseInt(data?.price)}</strong></div>
                             <div class="divTableCol">
-                                <button type="button" class="btn btn-danger" onClick={() => handleRemovCart(data?._id)}>
-                                    <span class="fa fa-remove" ></span> Remove</button>
+                            <Button color="failure"
+                            onClick={() =>
+                                handleRemovCart(data?._id)}
+                                > Remove</Button>
+                                
                             </div>
                         </div>
                     ))}
@@ -98,7 +102,8 @@ const Cart = () => {
                             <button type="button" class="btn btn-default col-6">  </button>
                         </div>
                         <div class="divTableCol">
-                            <button type="button" class="btn btn-success">checkout</button>
+                        <Button color="success" > checkout</Button>
+                            
                         </div>
                     </div>
                 </div>
