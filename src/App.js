@@ -28,48 +28,24 @@ function App() {
           <Route element={<SidebarLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
-            <Route path="/product-add"
-              element={<PrivateRoutes><ProductAdd /></PrivateRoutes>}
-              errorElement={<RootBoundary />}
-            />
             <Route path="/product-details"
               element={<ProductDetails />}
             />
-            {/* <Route path='/product-details/:id' 
-       
-       element={<ProductDetails />}
-       loader={({ params }) => fetchProject(params.projectId)}
-      //  loader={async ({ params }) => {
-      //   const res = await fetch(`https://jsonplaceholder.org/posts/${params.id}`);
-      //   if (res.status === 404) {
-      //     throw new Response("Not Found", { status: 404 });
-      //   }
-      //   const home = await res.json();
-      //   const descriptionHtml = "";
-      //   return { home };
-      // }}
-       /> */}
             <Route path="/" element={<ProductList />} />
             <Route path='/cart' element={<Cart />} />
-           
-            
-          {/* <Route path="/profile" element={<PrivateRoutes><Profile /></PrivateRoutes>} />  */}
           <Route path="*" element={<PrivateRoutes><NotFound /></PrivateRoutes>}/>
-            {/* <Route path="*" element={<PrivateRoutes><NotFound /></PrivateRoutes>} />
-            <Route path="profile" element={<Outlet />}>
-     <Route index element={<PrivateRoutes><profileSidebar /></PrivateRoutes>} />
-     <Route path=":id" element={<PrivateRoutes><Profile /></PrivateRoutes>} /> */}
-   {/* </Route> */}
-    
-            
           </Route>
           <Route element={<PrivateRoutes><ProfileSidebar /></PrivateRoutes>}>
     <Route path="/profile/:id" 
     element={<PrivateRoutes><Profile /></PrivateRoutes>} /> 
      <Route path="/user-list"
       element={<PrivateRoutes><UserList/></PrivateRoutes>}/>
-      <Route path="/dashboard" element={<PrivateRoutes><Dashboard /></PrivateRoutes>} />
+      <Route path="/dashboard" 
+      element={<PrivateRoutes><Dashboard /></PrivateRoutes>} />
+      <Route path="/product-add"
+              element={<PrivateRoutes><ProductAdd /></PrivateRoutes>}
+              errorElement={<RootBoundary />}
+            />
   </Route>
           
         </Routes>

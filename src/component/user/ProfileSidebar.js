@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import { HiOutlineMinusSm,HiUserCircle , HiOutlinePlusSm, HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
 
 const ProfileSidebar = ()=>{
+  const token = localStorage.getItem('getToken');
     return(
         <div class="p-4 md:p-2">
              <Sidebar aria-label="Sidebar with multi-level dropdown example">
@@ -23,12 +24,16 @@ const ProfileSidebar = ()=>{
                   return <IconComponent aria-hidden className={twMerge(theme.label.icon.open[open ? 'on' : 'off'])} />
                 }}
               >
-                <Sidebar.Item href="#">Products</Sidebar.Item>
+                
+
+                <Sidebar.Item>
+                <NavLink to="/product-add">
+                  Product Add</NavLink></Sidebar.Item>
                 <Sidebar.Item href="#">Sales</Sidebar.Item>
                 <Sidebar.Item href="#">Refunds</Sidebar.Item>
                 <Sidebar.Item href="#">Shipping</Sidebar.Item>
               </Sidebar.Collapse>
-              <NavLink to="">
+              <NavLink to={`/profile/${token}`}>
               <Sidebar.Item  icon={HiUserCircle}>
                 Profile
               </Sidebar.Item>

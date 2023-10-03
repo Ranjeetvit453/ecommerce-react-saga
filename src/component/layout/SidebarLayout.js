@@ -54,9 +54,9 @@ const SidebarLayout = () => {
               Product Details
             </NavLink> */}
 
-            <NavLink to="/product-add" className="text-sm font-semibold leading-6 text-gray-900">
+            {/* <NavLink to="/product-add" className="text-sm font-semibold leading-6 text-gray-900">
               ProductAdd
-            </NavLink>
+            </NavLink> */}
             <NavLink to="/profile/ranjeet" className="text-sm font-semibold leading-6 text-gray-900">
               Profile
             </NavLink>

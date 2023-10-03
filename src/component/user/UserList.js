@@ -59,7 +59,8 @@ const UserList = ()=>{
    return(
     <>
     
-  <div class="max-w-sm w-full bg-white dark:bg-gray-800 p-4 md:p-6" style={{ marginLeft:265,marginTop:-415}}>
+  <div class="max-w-sm w-full bg-white dark:bg-gray-800 p-4 md:p-6" 
+  style={{ marginLeft:265,marginTop:-380}}>
   <h4 class="text-2xl font-bold dark:text-white">User List</h4>
   
    {loader ? <LoderSpinner/>:

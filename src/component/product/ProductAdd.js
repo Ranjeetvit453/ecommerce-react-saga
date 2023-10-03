@@ -48,13 +48,10 @@ const ProductAdd = () => {
   //     body("price","Product price required").notEmpty(),
   //  }
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col xs={6} md={2}></Col>
-          <Col xs={6} md={8} style={{ marginTop: 123 }}>
+    <div class="max-w-sm w-full bg-white dark:bg-gray-800
+    p-4 md:p-6" style={{ marginLeft:350,marginTop:-590,maxWidth:"800px"}}>
             {loader ? <LoderSpinner /> :
-              <Card >
+              <Card  >
                 <Card.Body>
                   <Card.Title style={{ textAlign: "center" }}>Add Product</Card.Title>
 
@@ -115,10 +112,8 @@ const ProductAdd = () => {
                 </Card.Body>
               </Card>
             }
-          </Col>
-          <Col xs={6} md={2}></Col>
-        </Row>
-      </Container>
+          
+         
       <ToastContainer
         position="top-right"
         autoClose={5000}
