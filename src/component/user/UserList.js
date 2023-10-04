@@ -1,4 +1,4 @@
-import { Table } from 'flowbite-react';
+import { Table,Tooltip  } from 'flowbite-react';
 import { useEffect,useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { LoderSpinner } from '../../utils/Utils';
@@ -101,18 +101,29 @@ const UserList = ()=>{
           </Table.Cell>
         
           <Table.Cell>
-            
-            <span className="font-medium text-cyan-600
+          <Tooltip
+        content="Edit"
+        style="dark"
+      >
+        <span className="font-medium text-cyan-600
              hover:underline dark:text-cyan-500"
               onClick={()=>{handleEdit(data._id)}}>
 
               <FaPenToSquare />
-            </span>&nbsp;
-            <span className="font-medium text-cyan-600
+            </span>
+      </Tooltip>
+            &nbsp;
+            <Tooltip
+        content="Delete"
+        style="dark"
+      >
+        <span className="font-medium text-cyan-600
              hover:underline dark:text-cyan-500"
               onClick={()=>{handleDelete(data._id)}} >
               <FaTrash />
             </span>
+      </Tooltip>
+            
           </Table.Cell>
         </Table.Row>
         ))}

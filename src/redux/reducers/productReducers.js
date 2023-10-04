@@ -1,11 +1,11 @@
 
 import { ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_ERROR, PRODUCT_LIST_REQUEST } from "../type/productType"
 const initialState = {
-    status: "",
-    data: [],
-    error: "",
-    loader: false,
-    message: "",
+    loader:false,
+    status:"",
+    message:"",
+    data:[],
+    error:"",
 }
 
 const productReducers = (state = initialState, action) => {
@@ -21,22 +21,22 @@ const productReducers = (state = initialState, action) => {
                 message: ""
             }
         case ADD_PRODUCT_SUCCESS:
-            console.log("products -------reducer", action.productData.status)
-            console.log("products -------reducer 0--- data", action.productData.data)
             return {
                 ...state,
-                data: [...state.data, ...action.productData?.data],
-                error: "",
                 loader: false,
-                status: action.productData.status,
+                status: action?.productData?.status,
+                error: "",
                 message: action.productData?.message,
+                
             }
         case PRODUCT_LIST_SUCCESS:
             // console.log("products -------reducer", action.productData)
             return {
                 ...state,
                 data: action?.productData?.data,
-                loader: false
+                loader: false,
+                error: "",
+                status: ""
 
             }
         case PRODUCT_LIST_REQUEST:

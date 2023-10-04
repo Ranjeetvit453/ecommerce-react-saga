@@ -13,6 +13,7 @@ const ProductAdd = () => {
   const loader = useSelector((state) => state.product.loader);
   const product = useSelector((state) => state.product);
   const status = useSelector((state) => state.product.status);
+  console.log("status product pages",product)
   const message = useSelector((state) => state.product.message);
   if (status == 201) {
     toast.success(message)

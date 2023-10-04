@@ -25,10 +25,8 @@ export function* addProduct(data) {
     const products = yield call(apiCall, 'POST', '/user/create-product', data.payload, true);
     const productData = products?.data;
     if (products?.data?.status == 201) {
-
       yield put({ type: ADD_PRODUCT_SUCCESS, productData })
     } else {
-
       yield put({ type: ADD_PRODUCT_ERROR, productData })
     }
 
