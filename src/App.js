@@ -35,6 +35,7 @@ function App() {
             <Route path='/cart' element={<Cart />} />
           <Route path="*" element={<PrivateRoutes><NotFound /></PrivateRoutes>}/>
           </Route>
+          
           <Route element={<PrivateRoutes><ProfileSidebar /></PrivateRoutes>}>
     <Route path="/profile/:id" 
     element={<PrivateRoutes><Profile /></PrivateRoutes>} /> 

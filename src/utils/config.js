@@ -1,3 +1,3 @@
 
 
-export const BASE_URL = "http://localhost:9999/api"
+export const BASE_URL = "https://ecommerce-api-mh5r.onrender.com/api"

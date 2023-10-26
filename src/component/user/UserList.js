@@ -136,12 +136,7 @@ const UserList = ()=>{
        handelClose= {handelClose}
        confirmAction = {confirmAction}
         /> 
-      {/* <Pagination
-      currentPage={currentPage}
-      onPageChange={page=>{setCurrentPage(page)}}
-      showIcons
-      totalPages={userData?.data?.length}
-    /> */}
+     
       <Pagination
         currentPage={currentPage}
         layout="pagination"
